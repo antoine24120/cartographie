@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+<img id="image" src="paysage.jpg" style="display: none">
+
+<canvas id="canvas" width="500" height="339" style=" border:1px solid #ddd;"></canvas>
+
+<script>
+    window.onload = function() {
+        var c = document.getElementById("canvas")
+        var ctx = c.getContext("2d");
+        var img = document.getElementById("image")
+
+        ctx.drawImage(img,0,0)
+
+        ctx.beginPath()
+        ctx.arc(40,50,20,0,Math.PI*2)
+        ctx.fillStyle = '#eec13b'
+        ctx.fill()
+
+        ctx.beginPath()
+        ctx.rect(150,200,100,100)
+        ctx.fillStyle = '#733d09'
+        ctx.fill()
+
+        ctx.beginPath()
+        ctx.rect(160,230,50,70)
+        ctx.fillStyle = '#815022'
+        ctx.fill()
+
+        ctx.beginPath()
+        ctx.moveTo(200, 150);
+        ctx.lineTo(150, 200);
+        ctx.lineTo(250, 200);
+        ctx.fillStyle = '#ee1d1d'
+        ctx.fill()
+
+    }
+</script>
+</body>
+</html>
