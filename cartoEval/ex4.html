@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Carto Eval</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <link rel="stylesheet" href="leaflet-compass.css"/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="leaflet-compass.js"></script>
+</head>
+
+<body onload="init()" style="margin: 0">
+
+    <div id="map1" style="display: block; height: 500px; max-width: 100%"></div>
+
+<script>
+
+    function init() {
+        navigator.geolocation.getCurrentPosition(function(position) {
+
+            _x = position.coords.longitude
+            _y = position.coords.latitude
+
+            let map = new L.Map('map1', {zoom: 12, center: new L.latLng([_y,_x]) });
+
+            map.addLayer(new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'));	//base layer
+
+            map.addControl(new L.Control.Compass({autoActive: true, showDigit:true}));
+
+            L.marker([_y, _x]).addTo(map)
+
+        })
+    } window.addEventListener("deviceorientation", init, true)
+
+</script>
+
+</body>
+</html>

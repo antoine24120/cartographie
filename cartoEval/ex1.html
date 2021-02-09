@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Carto Eval</title>
+</head>
+
+<body onload="init()">
+
+    <canvas id="compass" width="200" height="200"></canvas>
+
+<script>
+
+    let img = needle = ctx = null
+
+    function init() {
+        (ctx = document.getElementById('compass').getContext('2d')) ?
+            (
+                arrow = new Image(),
+                img = new Image(),
+                arrow.src = 'img/arrow.png',
+                img.src = 'img/compass.png',
+                window.addEventListener("deviceorientation", draw, true)
+            ) : alert("Canvas not supported")
+    }
+
+    function draw(event) {
+
+        event.alpha === null ?
+            event.alpha = 0
+            : null
+
+        ctx.clearRect(0, 0, 200, 200)
+        ctx.drawImage(img, 0, 0)
+        ctx.save()//for reloading screen
+        ctx.translate(100, 100) //position of center arrow
+        ctx.rotate(event.alpha * (Math.PI / 180)) //make rotation
+        ctx.drawImage(arrow, -100, -100) //draw arrow
+        ctx.restore() //for reloading screen
+    }
+
+</script>
+
+</body>
+</html>
